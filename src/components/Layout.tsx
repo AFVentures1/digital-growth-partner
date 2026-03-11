@@ -129,6 +129,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <Mail size={14} />
                   notta.fadeel@gmail.com
                 </a>
+                <a href="https://wa.me/254713946999" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Phone size={14} />
+                  +254 713 946 999
+                </a>
                 <p className="flex items-center gap-2 text-sm text-muted-foreground">
                   <MapPin size={14} />
                   Nairobi, Kenya
