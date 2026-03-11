@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Mail, MapPin, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -89,6 +90,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {/* MAIN */}
       <main className="flex-1">{children}</main>
+
+      <WhatsAppButton />
 
       {/* FOOTER */}
       <footer className="border-t border-border/50 bg-card/30">

@@ -18,13 +18,13 @@ const founders = [
   {
     name: "Avi Dharani",
     role: "Co-Founder",
-    desc: "Avi is a talented technologist and entrepreneur with a passion for building digital solutions that make a real difference for small businesses. With deep expertise in web development, AI systems, and business automation, Avi leads the technical vision at A&F Ventures — designing and architecting the platforms, websites, and AI tools that power our clients' growth. His hands-on approach ensures every solution is built to the highest standard.",
+    desc: "Avi is a talented strategist and business developer who brings a sharp understanding of market dynamics and client needs. He drives client relationships, business strategy, and go-to-market execution at A&F Ventures. Avi's ability to translate complex technology into clear business value is what makes our consulting approach unique — ensuring every client gets solutions that are not just technically excellent, but commercially impactful.",
     initial: "A",
   },
   {
     name: "Fadeel Notta",
     role: "Co-Founder",
-    desc: "Fadeel is a talented strategist and business developer who brings a sharp understanding of market dynamics and client needs. He drives client relationships, business strategy, and go-to-market execution at A&F Ventures. Fadeel's ability to translate complex technology into clear business value is what makes our consulting approach unique — ensuring every client gets solutions that are not just technically excellent, but commercially impactful.",
+    desc: "Fadeel is a talented technologist and entrepreneur with a passion for building digital solutions that make a real difference for small businesses. With deep expertise in web development, AI systems, and business automation, Fadeel leads the technical vision at A&F Ventures — designing and architecting the platforms, websites, and AI tools that power our clients' growth. His hands-on approach ensures every solution is built to the highest standard.",
     initial: "F",
   },
 ];
@@ -49,7 +49,7 @@ export default function About() {
             <motion.div {...fadeUp}>
               <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">About Us</p>
               <h1 className="heading-xl mb-8">Crafting the Future of Business</h1>
-              <div className="space-y-5">
+              <div className="space-y-5 text-justify">
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   A&F Ventures is a digital consultancy founded by two talented entrepreneurs — <strong className="text-foreground">Avi Dharani</strong> and <strong className="text-foreground">Fadeel Notta</strong> — with a shared mission to help small and medium businesses modernize using AI automation, smart websites, and integrated digital systems.
                 </p>

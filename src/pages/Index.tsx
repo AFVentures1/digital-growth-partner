@@ -10,6 +10,8 @@ import {
 import heroBg from "@/assets/hero-bg.jpg";
 import clientQaffee from "@/assets/client-qaffee.png";
 import clientDashboard from "@/assets/client-dashboard.png";
+import clientNtv from "@/assets/client-ntv.png";
+import clientAlmas from "@/assets/client-almas.png";
 import restaurantShowcase from "@/assets/restaurant-showcase.jpg";
 import businessOwner from "@/assets/business-owner.jpg";
 
@@ -181,7 +183,7 @@ export default function Index() {
             <h2 className="heading-lg">Businesses We Help</h2>
           </motion.div>
           <motion.div
-            className="grid md:grid-cols-2 gap-6"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -189,6 +191,8 @@ export default function Index() {
           >
             {[
               { img: clientQaffee, title: "Qaffee Point Restaurant", desc: "Website, booking system & online ordering platform" },
+              { img: clientNtv, title: "Noortaaj Village Restaurant", desc: "Catering platform, online ordering & loyalty rewards system" },
+              { img: clientAlmas, title: "Almas Electronics", desc: "E-commerce website, repair tracking & CRM system" },
               { img: clientDashboard, title: "Restaurant Management Dashboard", desc: "Revenue analytics, order tracking & AI chatbot assistant" },
               { img: restaurantShowcase, title: "Modern Restaurant Solutions", desc: "End-to-end digital infrastructure for food businesses" },
               { img: businessOwner, title: "MSME Digital Transformation", desc: "Helping small businesses modernize with smart technology" },
