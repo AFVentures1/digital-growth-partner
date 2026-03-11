@@ -95,7 +95,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container-grid py-16 md:py-20">
           <div className="grid md:grid-cols-4 gap-10">
             <div className="md:col-span-2">
-              <img src={logo} alt="A&F Ventures" className="h-12 w-auto mb-4" />
+              <img src={logo} alt="A&F Ventures" className="h-16 w-auto mb-4" />
               <p className="body-md max-w-sm">
                 Empowering restaurants and MSMEs with AI-powered digital systems to modernize, grow, and thrive.
               </p>

@@ -1,5 +1,6 @@
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import {
@@ -34,6 +35,16 @@ const reviews = [
   { text: "They helped us modernize our business digitally and attract more customers.", name: "Daniel M.", role: "Restaurant Manager" },
 ];
 
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
@@ -41,19 +52,28 @@ const fadeUp = {
 };
 
 export default function Index() {
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+
   return (
     <Layout>
       {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
+      <section ref={heroRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
+        <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
           <img src={heroBg} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/50" />
-        </div>
-        <div className="container-grid relative z-10 py-24 md:py-32">
+        </motion.div>
+        <motion.div className="container-grid relative z-10 py-24 md:py-32" style={{ opacity: heroOpacity, y: textY }}>
           <div className="max-w-2xl">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-8"
             >
@@ -62,26 +82,26 @@ export default function Index() {
             </motion.div>
             <motion.h1
               className="heading-xl mb-6 text-foreground"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
             >
               AI-Powered Digital Systems for{" "}
               <span className="gradient-text">Restaurants & MSMEs</span>
             </motion.h1>
             <motion.p
               className="text-lg leading-relaxed text-muted-foreground max-w-lg mb-10"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.25 }}
             >
               A&F Ventures helps restaurants and small businesses modernize their operations, attract more customers, and increase revenue through websites, automation, and AI tools.
             </motion.p>
             <motion.div
               className="flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
             >
               <Button variant="cta" size="lg" asChild>
                 <Link to="/contact">
@@ -94,27 +114,28 @@ export default function Index() {
               </Button>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* STATS */}
       <section className="border-t border-border/50 bg-card/30">
         <div className="container-grid py-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {stats.map((s, i) => (
-              <motion.div
-                key={i}
-                className="text-center"
-                {...fadeUp}
-                transition={{ delay: i * 0.1 }}
-              >
+              <motion.div key={i} className="text-center" variants={staggerItem}>
                 <p className="text-3xl md:text-4xl font-extrabold font-display gradient-text mb-1">
                   {s.value}
                 </p>
                 <p className="text-sm text-muted-foreground">{s.label}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -125,15 +146,20 @@ export default function Index() {
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">What We Build</p>
             <h2 className="heading-lg">Digital Solutions That Drive Growth</h2>
           </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {services.map((s, i) => {
               const Icon = s.icon;
               return (
                 <motion.div
                   key={i}
                   className="glass-card p-8 group hover:border-primary/30 hover:glow-border transition-all duration-500"
-                  {...fadeUp}
-                  transition={{ delay: i * 0.08 }}
+                  variants={staggerItem}
                 >
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <Icon size={22} className="text-primary" />
@@ -143,7 +169,7 @@ export default function Index() {
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -154,7 +180,13 @@ export default function Index() {
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Portfolio</p>
             <h2 className="heading-lg">Businesses We Help</h2>
           </motion.div>
-          <div className="grid md:grid-cols-2 gap-6">
+          <motion.div
+            className="grid md:grid-cols-2 gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {[
               { img: clientQaffee, title: "Qaffee Point Restaurant", desc: "Website, booking system & online ordering platform" },
               { img: clientDashboard, title: "Restaurant Management Dashboard", desc: "Revenue analytics, order tracking & AI chatbot assistant" },
@@ -164,8 +196,7 @@ export default function Index() {
               <motion.div
                 key={i}
                 className="glass-card overflow-hidden group cursor-pointer"
-                {...fadeUp}
-                transition={{ delay: i * 0.1 }}
+                variants={staggerItem}
               >
                 <div className="relative overflow-hidden aspect-video">
                   <img
@@ -181,7 +212,7 @@ export default function Index() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -192,14 +223,15 @@ export default function Index() {
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Testimonials</p>
             <h2 className="heading-lg">What Our Clients Say</h2>
           </motion.div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <motion.div
+            className="grid md:grid-cols-3 gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {reviews.map((r, i) => (
-              <motion.div
-                key={i}
-                className="glass-card p-8"
-                {...fadeUp}
-                transition={{ delay: i * 0.1 }}
-              >
+              <motion.div key={i} className="glass-card p-8" variants={staggerItem}>
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: 5 }).map((_, j) => (
                     <Star key={j} size={16} className="fill-primary text-primary" />
@@ -212,7 +244,7 @@ export default function Index() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -227,14 +259,12 @@ export default function Index() {
             <p className="body-lg max-w-lg mx-auto mb-10">
               Get a free business audit and discover how AI-powered digital systems can help you grow.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button variant="cta" size="lg" asChild>
-                <Link to="/contact">
-                  Get a Free Business Audit
-                  <ArrowRight size={16} />
-                </Link>
-              </Button>
-            </div>
+            <Button variant="cta" size="lg" asChild>
+              <Link to="/contact">
+                Get a Free Business Audit
+                <ArrowRight size={16} />
+              </Link>
+            </Button>
           </motion.div>
         </div>
       </section>
