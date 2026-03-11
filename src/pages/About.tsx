@@ -49,7 +49,7 @@ export default function About() {
             <motion.div {...fadeUp}>
               <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">About Us</p>
               <h1 className="heading-xl mb-8">Crafting the Future of Business</h1>
-              <div className="space-y-5">
+              <div className="space-y-5 text-justify">
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   A&F Ventures is a digital consultancy founded by two talented entrepreneurs — <strong className="text-foreground">Avi Dharani</strong> and <strong className="text-foreground">Fadeel Notta</strong> — with a shared mission to help small and medium businesses modernize using AI automation, smart websites, and integrated digital systems.
                 </p>

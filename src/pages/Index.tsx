@@ -191,6 +191,8 @@ export default function Index() {
           >
             {[
               { img: clientQaffee, title: "Qaffee Point Restaurant", desc: "Website, booking system & online ordering platform" },
+              { img: clientNtv, title: "Noortaaj Village Restaurant", desc: "Catering platform, online ordering & loyalty rewards system" },
+              { img: clientAlmas, title: "Almas Electronics", desc: "E-commerce website, repair tracking & CRM system" },
               { img: clientDashboard, title: "Restaurant Management Dashboard", desc: "Revenue analytics, order tracking & AI chatbot assistant" },
               { img: restaurantShowcase, title: "Modern Restaurant Solutions", desc: "End-to-end digital infrastructure for food businesses" },
               { img: businessOwner, title: "MSME Digital Transformation", desc: "Helping small businesses modernize with smart technology" },
