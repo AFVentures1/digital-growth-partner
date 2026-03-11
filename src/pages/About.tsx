@@ -18,13 +18,13 @@ const founders = [
   {
     name: "Avi Dharani",
     role: "Co-Founder",
-    desc: "Avi is a talented technologist and entrepreneur with a passion for building digital solutions that make a real difference for small businesses. With deep expertise in web development, AI systems, and business automation, Avi leads the technical vision at A&F Ventures — designing and architecting the platforms, websites, and AI tools that power our clients' growth. His hands-on approach ensures every solution is built to the highest standard.",
+    desc: "Avi is a talented strategist and business developer who brings a sharp understanding of market dynamics and client needs. He drives client relationships, business strategy, and go-to-market execution at A&F Ventures. Avi's ability to translate complex technology into clear business value is what makes our consulting approach unique — ensuring every client gets solutions that are not just technically excellent, but commercially impactful.",
     initial: "A",
   },
   {
     name: "Fadeel Notta",
     role: "Co-Founder",
-    desc: "Fadeel is a talented strategist and business developer who brings a sharp understanding of market dynamics and client needs. He drives client relationships, business strategy, and go-to-market execution at A&F Ventures. Fadeel's ability to translate complex technology into clear business value is what makes our consulting approach unique — ensuring every client gets solutions that are not just technically excellent, but commercially impactful.",
+    desc: "Fadeel is a talented technologist and entrepreneur with a passion for building digital solutions that make a real difference for small businesses. With deep expertise in web development, AI systems, and business automation, Fadeel leads the technical vision at A&F Ventures — designing and architecting the platforms, websites, and AI tools that power our clients' growth. His hands-on approach ensures every solution is built to the highest standard.",
     initial: "F",
   },
 ];
