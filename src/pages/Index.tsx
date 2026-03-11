@@ -183,7 +183,7 @@ export default function Index() {
             <h2 className="heading-lg">Businesses We Help</h2>
           </motion.div>
           <motion.div
-            className="grid md:grid-cols-2 gap-6"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
