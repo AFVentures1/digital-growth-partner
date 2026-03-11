@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Mail, MapPin } from "lucide-react";
+import { Menu, X, Mail, MapPin, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <nav className="container-grid flex items-center justify-between h-18 py-4">
           <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="A&F Ventures" className="h-10 w-auto" />
+            <img src={logo} alt="A&F Ventures" className="h-14 w-auto" />
           </Link>
 
           {/* Desktop nav */}
@@ -95,7 +95,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container-grid py-16 md:py-20">
           <div className="grid md:grid-cols-4 gap-10">
             <div className="md:col-span-2">
-              <img src={logo} alt="A&F Ventures" className="h-12 w-auto mb-4" />
+              <img src={logo} alt="A&F Ventures" className="h-16 w-auto mb-4" />
               <p className="body-md max-w-sm">
                 Empowering restaurants and MSMEs with AI-powered digital systems to modernize, grow, and thrive.
               </p>
@@ -128,6 +128,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <a href="mailto:notta.fadeel@gmail.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                   <Mail size={14} />
                   notta.fadeel@gmail.com
+                </a>
+                <a href="https://wa.me/254713946999" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Phone size={14} />
+                  +254 713 946 999
                 </a>
                 <p className="flex items-center gap-2 text-sm text-muted-foreground">
                   <MapPin size={14} />
