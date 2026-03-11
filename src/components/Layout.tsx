@@ -1,7 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Mail, MapPin } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -20,19 +22,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
       {/* NAV */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
-        <nav className="container-grid flex items-center justify-between h-16">
-          <Link to="/" className="font-display font-bold text-xl tracking-tight text-foreground">
-            A&F VENTURES
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
+        <nav className="container-grid flex items-center justify-between h-18 py-4">
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="A&F Ventures" className="h-10 w-auto" />
           </Link>
 
-          {/* Desktop / Tablet nav */}
-          <div className="hidden md:flex items-center gap-6">
+          {/* Desktop nav */}
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-sm font-medium transition-all duration-300 hover:text-primary ${
                   location.pathname === link.to ? "text-primary" : "text-muted-foreground"
                 }`}
               >
@@ -40,13 +42,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Button variant="cta" size="sm" asChild>
-              <Link to="/contact">Book a Consultation</Link>
+              <Link to="/contact">Get Started</Link>
             </Button>
           </div>
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden text-foreground"
+            className="lg:hidden text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -55,49 +57,54 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </nav>
 
         {/* Mobile menu */}
-        {mobileOpen && (
-          <div className="md:hidden border-t bg-background px-6 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setMobileOpen(false)}
-                className={`block text-sm font-medium py-2 ${
-                  location.pathname === link.to ? "text-primary" : "text-muted-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Button variant="cta" size="sm" className="w-full mt-2" asChild>
-              <Link to="/contact" onClick={() => setMobileOpen(false)}>
-                Book a Consultation
-              </Link>
-            </Button>
-          </div>
-        )}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden border-t border-border/50 bg-background/95 backdrop-blur-xl px-6 py-6 space-y-1"
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block text-base font-medium py-3 transition-colors ${
+                    location.pathname === link.to ? "text-primary" : "text-muted-foreground"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Button variant="cta" size="default" className="w-full mt-4" asChild>
+                <Link to="/contact" onClick={() => setMobileOpen(false)}>
+                  Get Started
+                </Link>
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* MAIN */}
       <main className="flex-1">{children}</main>
 
       {/* FOOTER */}
-      <footer className="border-t">
-        <div className="container-grid py-12 md:py-16">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <p className="font-display font-bold text-lg tracking-tight text-foreground mb-3">
-                A&F VENTURES
-              </p>
-              <p className="body-md">
-                Digital systems and AI automation for small businesses.
+      <footer className="border-t border-border/50 bg-card/30">
+        <div className="container-grid py-16 md:py-20">
+          <div className="grid md:grid-cols-4 gap-10">
+            <div className="md:col-span-2">
+              <img src={logo} alt="A&F Ventures" className="h-12 w-auto mb-4" />
+              <p className="body-md max-w-sm">
+                Empowering restaurants and MSMEs with AI-powered digital systems to modernize, grow, and thrive.
               </p>
             </div>
             <div>
-              <p className="font-display font-semibold text-sm uppercase tracking-wide text-foreground mb-3">
-                Navigation
+              <p className="font-display font-semibold text-sm uppercase tracking-widest text-foreground mb-4">
+                Pages
               </p>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {navLinks.map((link) => (
                   <Link
                     key={link.to}
@@ -110,17 +117,32 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
             <div>
-              <p className="font-display font-semibold text-sm uppercase tracking-wide text-foreground mb-3">
+              <p className="font-display font-semibold text-sm uppercase tracking-widest text-foreground mb-4">
                 Contact
               </p>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <p>info@afventures.co.ke</p>
-                <p>Nairobi, Kenya</p>
+              <div className="space-y-3">
+                <a href="mailto:avidharani110@gmail.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Mail size={14} />
+                  avidharani110@gmail.com
+                </a>
+                <a href="mailto:notta.fadeel@gmail.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Mail size={14} />
+                  notta.fadeel@gmail.com
+                </a>
+                <p className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <MapPin size={14} />
+                  Nairobi, Kenya
+                </p>
               </div>
             </div>
           </div>
-          <div className="border-t mt-10 pt-6 text-sm text-muted-foreground">
-            © {new Date().getFullYear()} A&F Ventures. All rights reserved.
+          <div className="border-t border-border/50 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} A&F Ventures. All rights reserved.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Crafting the Future of Business.
+            </p>
           </div>
         </div>
       </footer>

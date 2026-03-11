@@ -2,13 +2,15 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
+import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 
 const packages = [
   {
     name: "Foundation",
+    desc: "Get your business online with the essentials.",
     features: [
       "Website development",
-      "Google Business profile setup",
+      "Google Business setup",
       "Basic SEO",
       "WhatsApp integration",
     ],
@@ -16,6 +18,7 @@ const packages = [
   {
     name: "Growth",
     featured: true,
+    desc: "Scale your operations with smart systems.",
     features: [
       "Everything in Foundation",
       "Booking / reservation system",
@@ -25,59 +28,69 @@ const packages = [
   },
   {
     name: "Scale",
+    desc: "Full digital transformation with AI.",
     features: [
       "Everything in Growth",
       "AI chatbot assistant",
       "Analytics dashboard",
-      "Business automation systems",
+      "Business automation",
     ],
   },
 ];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+};
 
 export default function Pricing() {
   return (
     <Layout>
       <section className="section-padding">
         <div className="container-grid">
-          <h1 className="heading-xl mb-6">Pricing</h1>
-          <p className="body-lg max-w-xl mb-16">
-            Packages designed to grow with your business.
-          </p>
+          <motion.div className="text-center max-w-2xl mx-auto mb-16" {...fadeUp}>
+            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Pricing</p>
+            <h1 className="heading-xl mb-6">Packages That Grow With You</h1>
+            <p className="body-lg">
+              Choose the package that fits your business needs. All packages include dedicated support.
+            </p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-px bg-border">
+          <div className="grid md:grid-cols-3 gap-6">
             {packages.map((pkg, i) => (
               <motion.div
                 key={i}
-                className={`p-8 md:p-10 ${
-                  pkg.featured ? "bg-foreground text-background" : "bg-background"
+                className={`glass-card p-8 md:p-10 relative flex flex-col ${
+                  pkg.featured ? "border-primary/40 glow-border" : ""
                 }`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                {...fadeUp}
                 transition={{ delay: i * 0.1 }}
               >
-                <h3 className="font-display font-bold text-2xl uppercase tracking-tight mb-8">
-                  {pkg.name}
-                </h3>
-                <ul className="space-y-3 mb-10">
+                {pkg.featured && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 px-4 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
+                    <Sparkles size={12} /> Most Popular
+                  </div>
+                )}
+                <h3 className="font-display font-bold text-2xl text-foreground mb-2">{pkg.name}</h3>
+                <p className="text-sm text-muted-foreground mb-8">{pkg.desc}</p>
+                <ul className="space-y-3 mb-10 flex-1">
                   {pkg.features.map((f, j) => (
-                    <li
-                      key={j}
-                      className={`text-sm ${
-                        pkg.featured ? "text-background/80" : "text-muted-foreground"
-                      }`}
-                    >
+                    <li key={j} className="flex items-center gap-3 text-sm text-foreground/80">
+                      <CheckCircle2 size={16} className="text-primary shrink-0" />
                       {f}
                     </li>
                   ))}
                 </ul>
                 <Button
-                  variant={pkg.featured ? "outline" : "cta"}
-                  size="default"
-                  className={pkg.featured ? "border-background/30 text-background hover:bg-background hover:text-foreground" : ""}
+                  variant={pkg.featured ? "cta" : "outline"}
+                  size="lg"
+                  className="w-full"
                   asChild
                 >
-                  <Link to="/contact">Get Started</Link>
+                  <Link to="/contact">
+                    Get Started <ArrowRight size={16} />
+                  </Link>
                 </Button>
               </motion.div>
             ))}

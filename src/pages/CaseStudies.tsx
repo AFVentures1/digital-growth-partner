@@ -2,86 +2,104 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
+import { ArrowRight, TrendingUp } from "lucide-react";
+import clientQaffee from "@/assets/client-qaffee.png";
+import clientDashboard from "@/assets/client-dashboard.png";
 
 const cases = [
   {
     name: "Qaffee Point Restaurant",
-    problem: "No website and customers relied only on walk-ins.",
-    solution: "Built an SEO optimized website with table booking system.",
-    result: "Improved visibility and customer engagement.",
+    image: clientQaffee,
+    problem: "No website and customers relied only on walk-ins. Zero online presence meant missed revenue opportunities.",
+    solution: "Built an SEO-optimized website with a table booking system, online menu, and WhatsApp integration for instant customer engagement.",
+    result: "Improved visibility and customer engagement. Online reservations now account for a significant portion of bookings.",
+    tags: ["Website", "Booking System", "SEO"],
   },
   {
     name: "Almas Electronics",
-    problem: "Old catalog website with no customer engagement.",
-    solution: "Created ecommerce system and CRM for repair tracking.",
-    result: "Improved sales and customer management.",
+    image: clientDashboard,
+    problem: "Old catalog website with no customer engagement. Repair tracking was done manually with paper records.",
+    solution: "Created a modern ecommerce system with integrated CRM for repair tracking, customer communication, and inventory management.",
+    result: "Improved sales and customer management. Repair turnaround time decreased and customer satisfaction increased.",
+    tags: ["E-commerce", "CRM", "Automation"],
   },
 ];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+};
 
 export default function CaseStudies() {
   return (
     <Layout>
       <section className="section-padding">
         <div className="container-grid">
-          <h1 className="heading-xl mb-6">Case Studies</h1>
-          <p className="body-lg max-w-xl mb-16">
-            Real results for real businesses.
-          </p>
+          <motion.div className="max-w-2xl mb-16" {...fadeUp}>
+            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Case Studies</p>
+            <h1 className="heading-xl mb-6">Real Results for Real Businesses</h1>
+            <p className="body-lg">
+              See how we've helped businesses transform their operations and grow revenue.
+            </p>
+          </motion.div>
 
-          <div className="space-y-24">
+          <div className="space-y-12">
             {cases.map((c, i) => (
-              <motion.article
+              <motion.div
                 key={i}
-                className="grid md:grid-cols-3 gap-8 md:gap-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+                className="glass-card overflow-hidden"
+                {...fadeUp}
+                transition={{ delay: i * 0.15 }}
               >
-                {/* Sticky stats column */}
-                <div className="md:sticky md:top-24 md:self-start space-y-6">
-                  <h2 className="font-display font-bold text-2xl uppercase tracking-tight">
-                    {c.name}
-                  </h2>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="font-display font-semibold text-xs uppercase tracking-widest text-muted-foreground mb-1">
-                        Problem
-                      </p>
-                      <p className="text-sm text-foreground">{c.problem}</p>
+                <div className="grid md:grid-cols-2">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={c.image}
+                      alt={c.name}
+                      className="w-full h-full object-cover min-h-[300px]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-card/50 md:block hidden" />
+                  </div>
+                  <div className="p-8 md:p-12 flex flex-col justify-center">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {c.tags.map((tag, j) => (
+                        <span key={j} className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
-                    <div>
-                      <p className="font-display font-semibold text-xs uppercase tracking-widest text-muted-foreground mb-1">
-                        Solution
-                      </p>
-                      <p className="text-sm text-foreground">{c.solution}</p>
-                    </div>
-                    <div>
-                      <p className="font-display font-semibold text-xs uppercase tracking-widest text-primary mb-1">
-                        Result
-                      </p>
-                      <p className="text-sm font-semibold text-foreground">{c.result}</p>
+                    <h2 className="font-display font-bold text-2xl text-foreground mb-6">{c.name}</h2>
+                    <div className="space-y-5">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">The Problem</p>
+                        <p className="text-sm text-foreground/80">{c.problem}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Our Solution</p>
+                        <p className="text-sm text-foreground/80">{c.solution}</p>
+                      </div>
+                      <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-1 flex items-center gap-1">
+                          <TrendingUp size={12} /> Result
+                        </p>
+                        <p className="text-sm font-medium text-foreground">{c.result}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                {/* Right content area */}
-                <div className="md:col-span-2">
-                  <div className="bg-card rounded-sm p-8 md:p-12 min-h-[240px] flex items-center justify-center">
-                    <p className="body-md text-center max-w-md">
-                      {c.solution} — resulting in {c.result.toLowerCase()}
-                    </p>
-                  </div>
-                </div>
-              </motion.article>
+              </motion.div>
             ))}
           </div>
 
-          <div className="mt-24 text-center">
+          <motion.div className="mt-16 text-center" {...fadeUp}>
             <Button variant="cta" size="lg" asChild>
-              <Link to="/contact">Start Your Project</Link>
+              <Link to="/contact">
+                Start Your Project
+                <ArrowRight size={16} />
+              </Link>
             </Button>
-          </div>
+          </motion.div>
         </div>
       </section>
     </Layout>

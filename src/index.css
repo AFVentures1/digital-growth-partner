@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,55 +6,61 @@
 
 @layer base {
   :root {
-    --background: 0 0% 97.6%;
-    --foreground: 0 0% 10.2%;
+    --background: 220 20% 7%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 91.8%;
-    --card-foreground: 0 0% 10.2%;
+    --card: 220 18% 11%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 97.6%;
-    --popover-foreground: 0 0% 10.2%;
+    --popover: 220 18% 11%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 156 100% 26.5%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 156 72% 45%;
+    --primary-foreground: 220 20% 7%;
 
-    --secondary: 0 0% 91.8%;
-    --secondary-foreground: 0 0% 10.2%;
+    --secondary: 220 14% 16%;
+    --secondary-foreground: 0 0% 90%;
 
-    --muted: 0 0% 91.8%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 220 14% 16%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 156 100% 26.5%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 156 72% 45%;
+    --accent-foreground: 220 20% 7%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 85%;
-    --input: 0 0% 91.8%;
-    --ring: 156 100% 26.5%;
+    --border: 220 14% 18%;
+    --input: 220 14% 16%;
+    --ring: 156 72% 45%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 97.6%;
-    --sidebar-foreground: 0 0% 10.2%;
-    --sidebar-primary: 156 100% 26.5%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 91.8%;
-    --sidebar-accent-foreground: 0 0% 10.2%;
-    --sidebar-border: 0 0% 85%;
-    --sidebar-ring: 156 100% 26.5%;
+    --sidebar-background: 220 20% 7%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 156 72% 45%;
+    --sidebar-primary-foreground: 220 20% 7%;
+    --sidebar-accent: 220 14% 16%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 220 14% 18%;
+    --sidebar-ring: 156 72% 45%;
 
     /* Custom tokens */
     --section-gap: 120px;
     --font-display: 'Plus Jakarta Sans', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --gradient-primary: linear-gradient(135deg, hsl(156, 72%, 45%), hsl(160, 80%, 35%));
+    --shadow-glow: 0 0 40px -10px hsl(156 72% 45% / 0.3);
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -69,7 +75,7 @@
 
 @layer utilities {
   .section-padding {
-    @apply py-[120px] max-md:py-16;
+    @apply py-24 md:py-32;
   }
 
   .container-grid {
@@ -78,26 +84,39 @@
 
   .heading-xl {
     font-family: var(--font-display);
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight leading-[1.1];
+    @apply text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05];
   }
 
   .heading-lg {
     font-family: var(--font-display);
-    @apply text-3xl md:text-4xl font-bold uppercase tracking-tight leading-[1.15];
+    @apply text-3xl md:text-4xl font-bold tracking-tight leading-[1.1];
   }
 
   .heading-md {
     font-family: var(--font-display);
-    @apply text-xl md:text-2xl font-bold uppercase tracking-tight;
+    @apply text-xl md:text-2xl font-bold tracking-tight;
   }
 
   .body-lg {
-    @apply text-lg leading-relaxed;
+    @apply text-lg leading-relaxed font-light;
     color: hsl(var(--muted-foreground));
   }
 
   .body-md {
-    @apply text-base leading-relaxed;
+    @apply text-base leading-relaxed font-light;
     color: hsl(var(--muted-foreground));
+  }
+
+  .glass-card {
+    @apply bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(156, 72%, 45%), hsl(160, 80%, 60%));
+  }
+
+  .glow-border {
+    box-shadow: 0 0 30px -10px hsl(156 72% 45% / 0.2);
   }
 }
