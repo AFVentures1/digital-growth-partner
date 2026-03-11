@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Mail, MapPin } from "lucide-react";
+import { Menu, X, Mail, MapPin, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
