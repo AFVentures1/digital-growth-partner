@@ -10,6 +10,8 @@ import {
 import heroBg from "@/assets/hero-bg.jpg";
 import clientQaffee from "@/assets/client-qaffee.png";
 import clientDashboard from "@/assets/client-dashboard.png";
+import clientNtv from "@/assets/client-ntv.png";
+import clientAlmas from "@/assets/client-almas.png";
 import restaurantShowcase from "@/assets/restaurant-showcase.jpg";
 import businessOwner from "@/assets/business-owner.jpg";
 
