@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <nav className="container-grid flex items-center justify-between h-18 py-4">
           <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="A&F Ventures" className="h-10 w-auto" />
+            <img src={logo} alt="A&F Ventures" className="h-14 w-auto" />
           </Link>
 
           {/* Desktop nav */}
