@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Mail, MapPin, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const navLinks = [
   { to: "/", label: "Home" },
