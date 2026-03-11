@@ -91,6 +91,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* MAIN */}
       <main className="flex-1">{children}</main>
 
+      <WhatsAppButton />
+
       {/* FOOTER */}
       <footer className="border-t border-border/50 bg-card/30">
         <div className="container-grid py-16 md:py-20">
