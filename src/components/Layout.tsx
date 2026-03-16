@@ -13,6 +13,7 @@ const navLinks = [
   { to: "/reviews", label: "Reviews" },
   { to: "/pricing", label: "Pricing" },
   { to: "/about", label: "About" },
+  { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -147,9 +148,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} A&F Ventures. All rights reserved.
             </p>
-            <p className="text-sm text-muted-foreground">
-              Crafting the Future of Business.
-            </p>
+            <div className="flex items-center gap-6">
+              <Link to="/privacy-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link to="/terms-of-service" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link>
+            </div>
           </div>
         </div>
       </footer>
