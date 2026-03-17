@@ -1,11 +1,11 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import {
   Globe, CalendarCheck, Bot, Users, Workflow, BarChart3,
-  ArrowRight, Star, CheckCircle2
+  ArrowRight, Star, CheckCircle2, Search, Palette, Code2, Rocket
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import clientQaffee from "@/assets/client-qaffee.png";
@@ -29,6 +29,13 @@ const stats = [
   { value: "3x", label: "Average Revenue Growth" },
   { value: "24/7", label: "AI Support Active" },
   { value: "98%", label: "Client Satisfaction" },
+];
+
+const process = [
+  { step: "01", title: "Discovery", desc: "We audit your business, understand your goals, and identify opportunities for digital growth.", icon: Search },
+  { step: "02", title: "Design", desc: "We craft a tailored digital strategy with wireframes, workflows, and system architecture.", icon: Palette },
+  { step: "03", title: "Build", desc: "Our team develops your systems — websites, chatbots, dashboards — with precision.", icon: Code2 },
+  { step: "04", title: "Launch & Support", desc: "We deploy, train your team, and provide ongoing optimization and support.", icon: Rocket },
 ];
 
 const reviews = [
@@ -70,6 +77,7 @@ export default function Index() {
         <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
           <img src={heroBg} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </motion.div>
         <motion.div className="container-grid relative z-10 py-24 md:py-32" style={{ opacity: heroOpacity, y: textY }}>
           <div className="max-w-2xl">
@@ -120,8 +128,9 @@ export default function Index() {
       </section>
 
       {/* STATS */}
-      <section className="border-t border-border/50 bg-card/30">
-        <div className="container-grid py-16">
+      <section className="border-t border-border/50 bg-card/30 relative overflow-hidden">
+        <div className="absolute inset-0 dot-grid opacity-30" />
+        <div className="container-grid py-16 relative z-10">
           <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
             variants={staggerContainer}
@@ -142,11 +151,12 @@ export default function Index() {
       </section>
 
       {/* SERVICES */}
-      <section className="section-padding">
-        <div className="container-grid">
+      <section className="section-padding relative gradient-mesh">
+        <div className="container-grid relative z-10">
           <motion.div className="text-center mb-16" {...fadeUp}>
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">What We Build</p>
-            <h2 className="heading-lg">Digital Solutions That Drive Growth</h2>
+            <h2 className="heading-lg mb-4">Digital Solutions That Drive Growth</h2>
+            <p className="body-md max-w-lg mx-auto">End-to-end technology solutions tailored for restaurants and small businesses.</p>
           </motion.div>
           <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -160,7 +170,7 @@ export default function Index() {
               return (
                 <motion.div
                   key={i}
-                  className="glass-card p-8 group hover:border-primary/30 hover:glow-border transition-all duration-500"
+                  className="glass-card p-8 group hover:border-primary/30 hover:glow-border"
                   variants={staggerItem}
                 >
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
@@ -175,12 +185,51 @@ export default function Index() {
         </div>
       </section>
 
+      {/* HOW WE WORK */}
+      <section className="section-padding border-t border-border/50">
+        <div className="container-grid">
+          <motion.div className="text-center mb-16" {...fadeUp}>
+            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Our Process</p>
+            <h2 className="heading-lg mb-4">How We Work</h2>
+            <p className="body-md max-w-lg mx-auto">A proven four-step process to take your business from traditional to digital-first.</p>
+          </motion.div>
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {process.map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <motion.div
+                  key={i}
+                  className="glass-card p-8 relative group hover:border-primary/30 hover:glow-border"
+                  variants={staggerItem}
+                >
+                  <div className="absolute top-6 right-6 text-4xl font-extrabold font-display text-border/80 select-none">
+                    {p.step}
+                  </div>
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                    <Icon size={22} className="text-primary" />
+                  </div>
+                  <h3 className="font-display font-bold text-lg mb-3 text-foreground">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
       {/* CLIENT SHOWCASE */}
       <section className="section-padding border-t border-border/50">
         <div className="container-grid">
           <motion.div className="text-center mb-16" {...fadeUp}>
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Portfolio</p>
-            <h2 className="heading-lg">Businesses We Help</h2>
+            <h2 className="heading-lg mb-4">Businesses We Help</h2>
+            <p className="body-md max-w-lg mx-auto">Real solutions we've built for real businesses across Kenya.</p>
           </motion.div>
           <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -199,7 +248,7 @@ export default function Index() {
             ].map((item, i) => (
               <motion.div
                 key={i}
-                className="glass-card overflow-hidden group cursor-pointer"
+                className="glass-card overflow-hidden group cursor-pointer hover:border-primary/30 hover:glow-border"
                 variants={staggerItem}
               >
                 <div className="relative overflow-hidden aspect-video">
@@ -207,8 +256,9 @@ export default function Index() {
                     src={item.img}
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
                 </div>
                 <div className="p-6">
                   <h3 className="font-display font-bold text-lg text-foreground mb-1">{item.title}</h3>
@@ -221,8 +271,9 @@ export default function Index() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="section-padding border-t border-border/50">
-        <div className="container-grid">
+      <section className="section-padding border-t border-border/50 relative">
+        <div className="absolute inset-0 dot-grid opacity-20" />
+        <div className="container-grid relative z-10">
           <motion.div className="text-center mb-16" {...fadeUp}>
             <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Testimonials</p>
             <h2 className="heading-lg">What Our Clients Say</h2>
@@ -235,16 +286,21 @@ export default function Index() {
             viewport={{ once: true }}
           >
             {reviews.map((r, i) => (
-              <motion.div key={i} className="glass-card p-8" variants={staggerItem}>
+              <motion.div key={i} className="glass-card p-8 hover:border-primary/30 hover:glow-border" variants={staggerItem}>
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: 5 }).map((_, j) => (
                     <Star key={j} size={16} className="fill-primary text-primary" />
                   ))}
                 </div>
-                <p className="text-foreground leading-relaxed mb-6">"{r.text}"</p>
-                <div>
-                  <p className="font-display font-bold text-sm text-foreground">{r.name}</p>
-                  <p className="text-xs text-muted-foreground">{r.role}</p>
+                <p className="text-foreground leading-relaxed mb-6 text-sm">"{r.text}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span className="text-primary font-display font-bold text-sm">{r.name.charAt(0)}</span>
+                  </div>
+                  <div>
+                    <p className="font-display font-bold text-sm text-foreground">{r.name}</p>
+                    <p className="text-xs text-muted-foreground">{r.role}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -256,19 +312,27 @@ export default function Index() {
       <section className="section-padding border-t border-border/50">
         <div className="container-grid">
           <motion.div
-            className="glass-card p-12 md:p-20 text-center glow-border"
+            className="glass-card p-12 md:p-20 text-center glow-border relative overflow-hidden"
             {...fadeUp}
           >
-            <h2 className="heading-lg mb-4">Ready to Modernize Your Business?</h2>
-            <p className="body-lg max-w-lg mx-auto mb-10">
-              Get a free business audit and discover how AI-powered digital systems can help you grow.
-            </p>
-            <Button variant="cta" size="lg" asChild>
-              <Link to="/contact">
-                Get a Free Business Audit
-                <ArrowRight size={16} />
-              </Link>
-            </Button>
+            <div className="absolute inset-0 dot-grid opacity-20" />
+            <div className="relative z-10">
+              <h2 className="heading-lg mb-4">Ready to Modernize Your Business?</h2>
+              <p className="body-lg max-w-lg mx-auto mb-10">
+                Get a free business audit and discover how AI-powered digital systems can help you grow.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button variant="cta" size="lg" asChild>
+                  <Link to="/contact">
+                    Get a Free Business Audit
+                    <ArrowRight size={16} />
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link to="/pricing">View Pricing</Link>
+                </Button>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
