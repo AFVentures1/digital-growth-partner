@@ -2,9 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Mail, MapPin, Phone } from "lucide-react";
+import { Menu, X, Mail, MapPin, Phone, Github, Linkedin, Twitter } from "lucide-react";
 import logo from "@/assets/logo.png";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BackToTop from "@/components/BackToTop";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -22,7 +23,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col noise-overlay">
       {/* NAV */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <nav className="container-grid flex items-center justify-between h-18 py-4">
@@ -36,11 +37,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-sm font-medium transition-all duration-300 hover:text-primary ${
+                className={`text-sm font-medium transition-all duration-300 hover:text-primary relative ${
                   location.pathname === link.to ? "text-primary" : "text-muted-foreground"
                 }`}
               >
                 {link.label}
+                {location.pathname === link.to && (
+                  <motion.span
+                    layoutId="nav-indicator"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
+                  />
+                )}
               </Link>
             ))}
             <Button variant="cta" size="sm" asChild>
@@ -93,16 +100,28 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <main className="flex-1">{children}</main>
 
       <WhatsAppButton />
+      <BackToTop />
 
       {/* FOOTER */}
-      <footer className="border-t border-border/50 bg-card/30">
-        <div className="container-grid py-16 md:py-20">
+      <footer className="border-t border-border/50 bg-card/30 relative overflow-hidden">
+        {/* Subtle gradient orb */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-primary/5 blur-3xl pointer-events-none" />
+        
+        <div className="container-grid py-16 md:py-20 relative z-10">
           <div className="grid md:grid-cols-4 gap-10">
             <div className="md:col-span-2">
               <img src={logo} alt="A&F Ventures" className="h-16 w-auto mb-4" />
-              <p className="body-md max-w-sm">
+              <p className="body-md max-w-sm mb-6">
                 Empowering restaurants and MSMEs with AI-powered digital systems to modernize, grow, and thrive.
               </p>
+              <div className="flex items-center gap-3">
+                <a href="https://wa.me/254713946999" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+                  <Phone size={16} />
+                </a>
+                <a href="mailto:avidharani110@gmail.com" className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+                  <Mail size={16} />
+                </a>
+              </div>
             </div>
             <div>
               <p className="font-display font-semibold text-sm uppercase tracking-widest text-foreground mb-4">
@@ -144,7 +163,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
           </div>
-          <div className="border-t border-border/50 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="glow-divider mt-12 mb-8" />
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} A&F Ventures. All rights reserved.
             </p>
