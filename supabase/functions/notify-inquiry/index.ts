@@ -66,7 +66,7 @@ serve(async (req) => {
       </div>
     `;
 
-    const recipients = ['avidharani110@gmail.com', 'notta.fadeel@gmail.com'];
+    const recipients = ['avidharani110@gmail.com'];
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
