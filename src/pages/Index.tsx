@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import {
   Globe, CalendarCheck, Bot, Users, Workflow, BarChart3,
-  ArrowRight, Star, CheckCircle2, Search, Palette, Code2, Rocket
+  ArrowRight, Star, Search, Palette, Code2, Rocket
 } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
 import clientQaffee from "@/assets/client-qaffee.png";
 import clientDashboard from "@/assets/client-dashboard.png";
 import clientNtv from "@/assets/client-ntv.png";
@@ -73,37 +73,51 @@ export default function Index() {
   return (
     <Layout>
       {/* HERO */}
-      <section ref={heroRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
-          <img src={heroBg} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/50" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-        </motion.div>
-        <motion.div className="container-grid relative z-10 py-24 md:py-32" style={{ opacity: heroOpacity, y: textY }}>
-          <div className="max-w-2xl">
+      <section ref={heroRef} className="relative min-h-[92vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(231_77%_8%)] via-[hsl(232_66%_15%)] to-[hsl(229_70%_10%)]" />
+        <div className="absolute inset-0 star-field" />
+        <div className="hero-orb royal" style={{ top: "10%", left: "55%", width: 500, height: 500 }} />
+        <div className="hero-orb gold" style={{ bottom: "5%", left: "30%", width: 350, height: 350 }} />
+
+        <motion.div className="container-grid relative z-10 py-24 md:py-32" style={{ opacity: heroOpacity, y: textY, scale: heroScale }}>
+          <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[hsl(var(--gold)/0.4)] bg-[hsl(var(--gold)/0.08)] text-[hsl(var(--gold))] text-sm font-medium mb-8 backdrop-blur-sm"
             >
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[hsl(var(--gold))] animate-pulse" />
               AI-Powered Digital Consulting
             </motion.div>
-            <motion.h1
-              className="heading-xl mb-6 text-foreground"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-            >
-              AI-Powered Digital Systems for{" "}
-              <span className="gradient-text">Restaurants & MSMEs</span>
-            </motion.h1>
+
+            <h1 className="heading-xl mb-6 text-white">
+              {"AI-Powered Digital Systems for".split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: i * 0.08 }}
+                  className="inline-block mr-3"
+                >
+                  {word}
+                </motion.span>
+              ))}
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="inline-block gradient-text"
+              >
+                Restaurants & MSMEs
+              </motion.span>
+            </h1>
+
             <motion.p
-              className="text-lg leading-relaxed text-muted-foreground max-w-lg mb-10"
+              className="text-lg leading-relaxed text-foreground/80 max-w-xl mb-10 text-justify"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
+              transition={{ duration: 0.7, delay: 0.8 }}
             >
               A&F Ventures helps restaurants and small businesses modernize their operations, attract more customers, and increase revenue through websites, automation, and AI tools.
             </motion.p>
@@ -111,7 +125,7 @@ export default function Index() {
               className="flex flex-wrap gap-4"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
+              transition={{ duration: 0.7, delay: 1 }}
             >
               <Button variant="cta" size="lg" asChild>
                 <Link to="/contact">
@@ -119,7 +133,7 @@ export default function Index() {
                   <ArrowRight size={16} />
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="lg" asChild className="border-[hsl(var(--gold)/0.4)] text-white hover:border-[hsl(var(--gold))] hover:bg-[hsl(var(--gold)/0.08)] hover:text-[hsl(var(--gold))]">
                 <Link to="/services">View Our Services</Link>
               </Button>
             </motion.div>
@@ -140,8 +154,8 @@ export default function Index() {
           >
             {stats.map((s, i) => (
               <motion.div key={i} className="text-center" variants={staggerItem}>
-                <p className="text-3xl md:text-4xl font-extrabold font-display gradient-text mb-1">
-                  {s.value}
+                <p className="text-3xl md:text-5xl font-extrabold font-display gradient-text mb-1">
+                  <AnimatedCounter value={s.value} />
                 </p>
                 <p className="text-sm text-muted-foreground">{s.label}</p>
               </motion.div>
