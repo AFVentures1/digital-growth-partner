@@ -154,8 +154,8 @@ export default function Index() {
           >
             {stats.map((s, i) => (
               <motion.div key={i} className="text-center" variants={staggerItem}>
-                <p className="text-3xl md:text-4xl font-extrabold font-display gradient-text mb-1">
-                  {s.value}
+                <p className="text-3xl md:text-5xl font-extrabold font-display gradient-text mb-1">
+                  <AnimatedCounter value={s.value} />
                 </p>
                 <p className="text-sm text-muted-foreground">{s.label}</p>
               </motion.div>
