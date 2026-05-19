@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import {
   Globe, CalendarCheck, Bot, Users, Workflow, BarChart3,
-  ArrowRight, Star, CheckCircle2, Search, Palette, Code2, Rocket
+  ArrowRight, Star, Search, Palette, Code2, Rocket
 } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
 import clientQaffee from "@/assets/client-qaffee.png";
 import clientDashboard from "@/assets/client-dashboard.png";
 import clientNtv from "@/assets/client-ntv.png";
